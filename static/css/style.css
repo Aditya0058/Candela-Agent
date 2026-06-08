@@ -1,0 +1,188 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #121212;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100%;
+    margin: 0;
+    overflow: hidden;
+    color: #E0E0E0;
+}
+
+/* Right Sidebar */
+#sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #1a1a1a;
+    border-left: 1px solid #444444;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+#sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid #444444;
+    text-align: center;
+}
+
+#digital-clock {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2rem;
+    color: #E0E0E0;
+}
+
+#sidebar-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Main content area */
+#main-content {
+    margin-right: 250px;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Button on home page */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #888888;
+    color: #121212;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #888888;
+}
+
+/* Todo page styles */
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    color: #E0E0E0;
+}
+
+.container h1 {
+    text-align: center;
+    color: #888888;
+}
+
+.todo-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.todo-input input {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #888888;
+    border-radius: 5px;
+    background: transparent;
+    color: #E0E0E0;
+    font-size: 1rem;
+}
+
+.todo-input button {
+    padding: 10px 20px;
+    background-color: #888888;
+    color: #121212;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.todo-input button:hover {
+    box-shadow: 0 0 10px #888888;
+}
+
+#taskList {
+    list-style: none;
+    padding: 0;
+}
+
+#taskList li {
+    padding: 12px;
+    margin: 5px 0;
+    background-color: rgba(136, 136, 136, 0.1);
+    border-left: 3px solid #888888;
+    border-radius: 3px;
+}
+
+.clear-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #B0B0B0;
+    color: #121212;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.clear-btn:hover {
+    box-shadow: 0 0 10px #B0B0B0;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #888888;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Notes page styles */
+.note-item {
+    padding: 15px;
+    margin: 10px 0;
+    background-color: rgba(136, 136, 136, 0.1);
+    border-left: 3px solid #888888;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.note-item p {
+    margin: 0;
+    flex: 1;
+    word-wrap: break-word;
+}
+
+.delete-note-btn {
+    padding: 5px 10px;
+    background-color: #B0B0B0;
+    color: #121212;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    margin-left: 10px;
+}
+
+.delete-note-btn:hover {
+    box-shadow: 0 0 10px #B0B0B0;
+}

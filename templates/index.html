@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+   <div id="sidebar">
+       <div id="sidebar-header">
+           <div id="digital-clock"></div>
+       </div>
+       <div id="sidebar-content">
+           <!-- Future features will be added here -->
+       </div>
+   </div>
+
+   <div id="main-content">
+   <h1>hello world</h1>
+
+   <div style="text-align: center; margin-top: 50px;">
+       <a href="/todos" class="btn">Todo List</a>
+       <a href="/notes" class="btn" style="margin-left: 20px;">Notes</a>
+   </div>
+   </div>
+
+   <script>
+       function updateClock() {
+           const now = new Date();
+           const hours = String(now.getHours()).padStart(2, '0');
+           const minutes = String(now.getMinutes()).padStart(2, '0');
+           const seconds = String(now.getSeconds()).padStart(2, '0');
+           document.getElementById('digital-clock').textContent = `${hours}:${minutes}:${seconds}`;
+       }
+
+       updateClock();
+       setInterval(updateClock, 1000);
+   </script>
+
+</body>
+</html>

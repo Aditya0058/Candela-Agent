@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>My Todos</h1>
+
+        <div class="todo-input">
+            <input type="text" id="taskInput" placeholder="Enter a new task...">
+            <button onclick="addTask()">Add Task</button>
+        </div>
+
+        <ul id="taskList"></ul>
+
+        <button class="clear-btn" onclick="clearTasks()">Clear All</button>
+
+        <a href="/" class="back-link">← Back to Home</a>
+    </div>
+
+    <script>
+        // Load tasks on page load
+        document.addEventListener('DOMContentLoaded', loadTasks);
+
+        function loadTasks() {
+            fetch('/api/tasks')
+                .then(res => res.json())
+                .then(tasks => {
+                    const list = document.getElementById('taskList');
+                    list.innerHTML = '';
+                    tasks.forEach(task => {
+                        const li = document.createElement('li');
+                        li.textContent = task;
+                        list.appendChild(li);
+                    });
+                });
+        }
+
+        function addTask() {
+            const input = document.getElementById('taskInput');
+            const task = input.value.trim();
+
+            if (task) {
+                fetch('/api/tasks', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ task: task })
+                })
+                .then(() => {
+                    input.value = '';
+                    loadTasks();
+                });
+            }
+        }
+
+        // Allow pressing Enter to add task
+        document.getElementById('taskInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') addTask();
+        });
+
+        function clearTasks() {
+            fetch('/api/tasks', { method: 'DELETE' })
+                .then(() => loadTasks());
+        }
+    </script>
+</body>
+</html>
