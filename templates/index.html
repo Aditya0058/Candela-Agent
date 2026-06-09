@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>LLM Chat</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
@@ -38,6 +38,29 @@
        updateClock();
        setInterval(updateClock, 1000);
    </script>
+
+
+<!-- chat box now --> 
+<div id="chat-box">Chat Box</div>
+<input type="text" id="user-input" placeholder="Type your message here...">
+<button id="send-btn">Send</button>
+
+<script>
+    document.getElementById("send-btn").addEventListener("click", function() {
+        const userMessage = document.getElementById("user-input").value;
+        
+        fetch("http://localhost:5000/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: userMessage })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("chat-box").textContent += "\n" + data.reply;
+        })
+    })
+</script>
+
 
 </body>
 </html>
