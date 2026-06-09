@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Candela-Chat | AI Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Geist:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#4b4643",
+                    "border-strong": "#444444",
+                    "primary-fixed-dim": "#c6c6c6",
+                    "on-primary-fixed": "#1a1c1c",
+                    "primary-container": "#e0e0e0",
+                    "surface-tint": "#c6c6c6",
+                    "surface": "#131313",
+                    "surface-muted": "#1E1E1E",
+                    "on-tertiary-container": "#67615e",
+                    "border-subtle": "#2A2A2A",
+                    "secondary-container": "#464747",
+                    "surface-dim": "#131313",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "text-secondary": "#B0B0B0",
+                    "surface-container": "#201f1f",
+                    "surface-bright": "#393939",
+                    "on-error": "#690005",
+                    "surface-variant": "#353534",
+                    "on-tertiary-fixed": "#1f1b19",
+                    "surface-container-high": "#2a2a2a",
+                    "secondary": "#c7c6c6",
+                    "tertiary-fixed": "#eae1dd",
+                    "on-primary-container": "#626363",
+                    "outline-variant": "#444748",
+                    "on-primary": "#2f3131",
+                    "inverse-primary": "#5d5f5f",
+                    "primary": "#fdfdfc",
+                    "background": "#131313",
+                    "error": "#ffb4ab",
+                    "surface-container-low": "#1c1b1b",
+                    "tertiary": "#fffbff",
+                    "secondary-fixed": "#e3e2e2",
+                    "inverse-on-surface": "#313030",
+                    "on-tertiary": "#342f2d",
+                    "on-primary-fixed-variant": "#454747",
+                    "error-container": "#93000a",
+                    "on-error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#c7c6c6",
+                    "on-surface-variant": "#c4c7c8",
+                    "on-surface": "#e5e2e1",
+                    "outline": "#8e9192",
+                    "on-secondary-container": "#b5b5b5",
+                    "on-secondary": "#303031",
+                    "surface-container-highest": "#353534",
+                    "tertiary-container": "#e7deda",
+                    "on-background": "#e5e2e1",
+                    "on-secondary-fixed-variant": "#464747",
+                    "primary-fixed": "#e2e2e2",
+                    "inverse-surface": "#e5e2e1",
+                    "surface-deep": "#0A0A0A",
+                    "tertiary-fixed-dim": "#cdc5c1",
+                    "surface-container-lowest": "#0e0e0e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "sidebar-width": "260px",
+                    "gutter": "1.5rem",
+                    "container-max-width": "800px",
+                    "margin-mobile": "1rem",
+                    "stack-gap": "2rem"
+            },
+            "fontFamily": {
+                    "label-md": ["JetBrains Mono"],
+                    "headline-lg-mobile": ["Geist"],
+                    "headline-lg": ["Geist"],
+                    "body-lg": ["Geist"],
+                    "headline-md": ["Geist"],
+                    "body-md": ["Geist"],
+                    "body-sm": ["Geist"]
+            },
+            "fontSize": {
+                    "label-md": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+            overflow: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #2A2A2A;
+            border-radius: 10px;
+        }
+        .message-stream {
+            mask-image: linear-gradient(to bottom, transparent, black 5%, black 90%, transparent);
+        }
+    </style>
+</head>
+<body class="flex h-screen w-full font-body-md text-body-md">
+<!-- SideNavBar (from JSON) -->
+<aside class="w-[260px] h-full fixed left-0 top-0 bg-surface-deep flex flex-col p-4 z-50 md:flex hidden border-r border-subtle">
+<div class="flex flex-col gap-1 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Candela-Chat</h1>
+<span class="font-label-md text-label-md text-text-secondary tracking-widest opacity-50 uppercase">AI Studio</span>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- New Chat -->
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-primary bg-surface-muted cursor-pointer active:scale-95 transition-all mb-6">
+<span class="material-symbols-outlined text-[20px]" data-icon="add_comment">add_comment</span>
+<span class="font-body-md text-body-md">New Chat</span>
+</button>
+<!-- Navigation Items -->
+<div class="space-y-1">
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-surface-muted transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined text-[20px]" data-icon="history">history</span>
+<span class="font-body-md text-body-md">History</span>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-surface-muted transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined text-[20px]" data-icon="smart_toy">smart_toy</span>
+<span class="font-body-md text-body-md">Models</span>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-surface-muted transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</button>
+</div>
+</nav>
+<div class="mt-auto pt-4 border-t border-subtle space-y-4">
+<div class="p-3 bg-surface-muted rounded-xl border border-subtle">
+<p class="font-label-md text-label-md text-primary mb-2">Upgrade Plan</p>
+<p class="text-[11px] text-text-secondary leading-tight mb-3">Unlock larger context windows and multimodal capabilities.</p>
+<button class="w-full py-1.5 bg-primary text-surface-deep text-[12px] font-bold rounded hover:opacity-90 transition-opacity">Upgrade</button>
+</div>
+<div class="flex justify-between px-2 text-text-secondary font-body-sm text-body-sm">
+<a class="hover:text-primary transition-colors" href="#">Help</a>
+<a class="hover:text-primary transition-colors" href="#">Privacy</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-full md:ml-[260px] relative bg-surface">
+<!-- TopAppBar (from JSON) -->
+<header class="fixed top-0 right-0 w-full md:w-[calc(100%-260px)] h-16 bg-surface/80 backdrop-blur-md z-40 border-b border-subtle">
+<div class="flex items-center justify-between px-gutter h-full max-w-container-max-width mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined md:hidden text-primary cursor-pointer" data-icon="menu">menu</span>
+<h2 class="font-label-md text-label-md text-primary font-bold">Exploring Quantum Physics</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-6">
+<span class="font-label-md text-label-md text-primary font-bold cursor-pointer">Current Session</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-secondary hover:text-primary cursor-pointer transition-opacity" data-icon="share">share</span>
+<span class="material-symbols-outlined text-text-secondary hover:text-primary cursor-pointer transition-opacity" data-icon="more_vert">more_vert</span>
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden border border-subtle">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3IMJxvPxPgo74Vvm83zAtUXO6DhW1cbKLhhuOX3vMFmmxCSEOcprl9FbDwrHUnUHUQt5cfnwtjOtwI1tyWDIQItA0O7UNeG-qdx7iN4pTFfgYb7_94xrdu8EO5QvufQoml0LKg3pj1MOV6JgbyNon5MQUfE5ZmIc_pTdVrShg40x_YnxQAgoPx2JZcBrzifHNCG95Q7r2HbZFCFQmJrF4ayuOAy6UMgekKyZSiPagKIZthBr4YstDtz9ThahKKVpqsLvVXyqfeA"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Chat Stream Canvas -->
+<section class="flex-1 overflow-y-auto custom-scrollbar pt-24 pb-40 px-gutter w-full">
+<div class="max-w-container-max-width mx-auto space-y-stack-gap">
+<!-- Message Pair: User -->
+<div class="flex flex-col items-end gap-2 animate-in fade-in slide-in-from-bottom-4 duration-500">
+<div class="max-w-[85%] px-5 py-3 rounded-2xl bg-surface-muted border border-border-strong text-on-surface">
+<p class="font-body-md text-body-md">Can you explain the double-slit experiment in simple terms?</p>
+</div>
+<span class="text-[10px] text-text-secondary font-label-md pr-2">Just now</span>
+</div>
+<!-- Message Pair: AI Response -->
+<div class="flex flex-col items-start gap-4 animate-in fade-in slide-in-from-bottom-6 duration-700">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-6 h-6 rounded-sm bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-surface-deep text-[16px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<span class="font-label-md text-label-md text-primary uppercase tracking-tighter font-bold">Candela v4.2</span>
+</div>
+<div class="max-w-[95%] space-y-4 text-on-surface leading-relaxed">
+<p class="font-body-lg text-body-lg">At its core, the double-slit experiment demonstrates that tiny particles like electrons can behave like both **particles** and **waves**.</p>
+<div class="space-y-3">
+<p class="font-body-md text-body-md">Imagine you're firing tiny marbles at a wall with two vertical slits:</p>
+<ul class="list-none space-y-3 pl-4 border-l border-border-strong">
+<li class="flex gap-3">
+<span class="text-primary-fixed-dim font-bold">01</span>
+<span>If they were purely particles, you'd see two stripes on the back wall where the marbles hit.</span>
+</li>
+<li class="flex gap-3">
+<span class="text-primary-fixed-dim font-bold">02</span>
+<span>However, when we fire electrons, they create an **interference pattern**—many stripes of varying intensity.</span>
+</li>
+<li class="flex gap-3">
+<span class="text-primary-fixed-dim font-bold">03</span>
+<span>This happens because the electron's "wave of probability" passes through both slits at once and interferes with itself.</span>
+</li>
+</ul>
+</div>
+<div class="p-4 bg-surface-deep rounded-xl border border-border-strong font-label-md text-label-md group relative">
+<div class="flex justify-between items-center mb-3 text-text-secondary opacity-60">
+<span>python / probability_wave.py</span>
+<span class="material-symbols-outlined text-[16px] cursor-pointer hover:text-primary" data-icon="content_copy">content_copy</span>
+</div>
+<pre class="text-secondary overflow-x-auto whitespace-pre-wrap"><code>def electron_position(x, t):
+    # Simulating a basic wave function interference
+    psi_1 = wave_function(x - slit_a, t)
+    psi_2 = wave_function(x - slit_b, t)
+    
+    # The probability is the square of the sum of amplitudes
+    probability = abs(psi_1 + psi_2)**2
+    return probability</code></pre>
+</div>
+<p class="font-body-md text-body-md text-text-secondary italic">The strangest part? If we try to "watch" which slit the electron goes through, it stops acting like a wave and reverts to behaving like a simple particle. The act of observation changes reality.</p>
+</div>
+</div>
+<!-- Interactive Canvas Placeholder (Extra visual flair) -->
+<div class="w-full aspect-video rounded-2xl bg-surface-deep border border-subtle relative overflow-hidden group">
+
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-8 bg-gradient-to-t from-surface-deep to-transparent">
+<span class="material-symbols-outlined text-primary mb-3 text-[32px]" data-icon="waves">waves</span>
+<h4 class="font-headline-md text-headline-md text-primary">Interference Visualization</h4>
+<p class="text-text-secondary max-w-md mt-2">Interactive wave function simulation active for this session.</p>
+<button class="mt-6 px-6 py-2 border border-border-strong rounded-full font-label-md text-label-md hover:border-primary transition-all active:scale-95">Open Simulator</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Message Input Anchor -->
+<div class="fixed bottom-0 right-0 w-full md:w-[calc(100%-260px)] px-gutter pb-8 bg-gradient-to-t from-surface via-surface to-transparent pt-10">
+<div class="max-w-container-max-width mx-auto relative group">
+<div class="bg-surface-muted border border-strong rounded-3xl p-2 transition-all focus-within:border-primary-fixed shadow-2xl">
+<div class="flex items-end gap-2">
+<button class="p-3 text-text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+</button>
+<textarea class="flex-1 bg-transparent border-none focus:ring-0 resize-none py-3 font-body-md text-body-md placeholder:text-text-secondary text-primary custom-scrollbar max-h-48" placeholder="Message Candela-Chat..." rows="1"></textarea>
+<div class="flex items-center gap-2 pr-2 pb-1.5">
+<button class="p-2 text-text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+</button>
+<button class="p-2 bg-primary text-surface-deep rounded-full hover:bg-white transition-all active:scale-90 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" data-icon="arrow_upward" style="font-variation-settings: 'wght' 700;">arrow_upward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="mt-3 flex justify-center">
+<p class="font-label-md text-[10px] text-text-secondary opacity-40">Candela-Chat can make mistakes. Verify important info.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Background Decoration -->
+<div class="fixed inset-0 pointer-events-none opacity-20 z-[-1]">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[30%] h-[30%] rounded-full bg-surface-bright/20 blur-[100px]"></div>
+</div>
+<script>
+        // Auto-expand textarea
+        const textarea = document.querySelector('textarea');
+        textarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+
+        // Simple mock interaction for the send button
+        const sendBtn = document.querySelector('button .material-symbols-outlined[data-icon="arrow_upward"]').parentElement;
+        sendBtn.addEventListener('click', () => {
+            if (textarea.value.trim()) {
+                console.log('Sending:', textarea.value);
+                textarea.value = '';
+                textarea.style.height = 'auto';
+            }
+        });
+    </script>
+</body></html>
