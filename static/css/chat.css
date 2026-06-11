@@ -1,0 +1,50 @@
+.sidebar {
+    width: 260px;          /* Sidebar width */
+    height: 100vh;         /* Full screen height */
+    background-color: #171717;
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    background: #1f1f1f;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border-right: 1px solid #2a2a2a;
+    border-radius: 0 16px 16px 0;
+
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-chat-icon {
+    width: 30px;
+    height: 30px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.sidebar-chat-text {
+    font-family: sans-serif; /* Change font */
+    font-size: 25px;                /* Make text bigger */
+    font-weight: 500;               /* Make it bolder */
+    color: white;                   /* Text color */
+    position: relative;
+    left: 12px;  /* move right */
+    top: -6px;    /* move down */
+}
+
+.sidebar-window-toggle-icon {
+    width: 27px;
+    height: 27px;
+    margin-top: 20px;
+    margin-left: 86px;
+}
+
+.toggleSidebarBtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0px;
+    outline: 2px solid red;
+
+}
