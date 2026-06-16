@@ -1,22 +1,18 @@
-const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('overlay');
-const toggleBtn = document.getElementById('toggleBtn');
-const closeBtn = document.getElementById('closeBtn');
+async function sendMessage() {
+    let prompt = document.getElementById("messageInput").value;
+    
+    let response = await fetch("http://127.0.0.1:5000/chat", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            prompt: prompt
+        })
+    });
 
-// Open sidebar
-toggleBtn.addEventListener('click', () => {
-  sidebar.classList.add('open');
-  overlay.classList.add('active');
-});
+    let data = await response.json();
+    console.log(data["response"]);
 
-// Close sidebar (X button)
-closeBtn.addEventListener('click', () => {
-  sidebar.classList.remove('open');
-  overlay.classList.remove('active');
-});
 
-// Close sidebar (clicking outside)
-overlay.addEventListener('click', () => {
-  sidebar.classList.remove('open');
-  overlay.classList.remove('active');
-});
+}

@@ -3,65 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LLM Chat</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Candela — Your AI Assistant</title>
+    <link rel="icon" size="1x1" href="/Assets/Logo/real_logo.png">
+    <link rel="stylesheet" href="/static/css/style.css">
+
 </head>
 <body>
+    <div>
+        <input type="text" placeholder="Message Candela..." id="messageInput">
+        <button onclick="sendMessage()">Send</button>
+    </div>
 
-   <div id="sidebar">
-       <div id="sidebar-header">
-           <div id="digital-clock"></div>
-       </div>
-       <div id="sidebar-content">
-           <!-- Future features will be added here -->
-       </div>
-   </div>
-
-   <div id="main-content">
-   <h1>hello world</h1>
-
-   <div style="text-align: center; margin-top: 50px;">
-       <a href="/templates/todos.html" class="btn">Todo List</a>
-       <a href="/templates/notes.html" class="btn" style="margin-left: 20px;">Notes</a>
-       <a href="/templates/chat.html" class="btn" style="margin-left: 20px;">Chat</a>
-   </div>
-   </div>
-
-   <script>
-       function updateClock() {
-           const now = new Date();
-           const hours = String(now.getHours()).padStart(2, '0');
-           const minutes = String(now.getMinutes()).padStart(2, '0');
-           const seconds = String(now.getSeconds()).padStart(2, '0');
-           document.getElementById('digital-clock').textContent = `${hours}:${minutes}:${seconds}`;
-       }
-
-       updateClock();
-       setInterval(updateClock, 1000);
-   </script>
-
-
-<!-- chat box now --> 
-<div id="chat-box">Chat Box</div>
-<input type="text" id="user-input" placeholder="Type your message here...">
-<button id="send-btn">Send</button>
-
-<script>
-    document.getElementById("send-btn").addEventListener("click", function() {
-        const userMessage = document.getElementById("user-input").value;
-        
-        fetch("http://localhost:5000/chat", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: userMessage })
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("chat-box").textContent += "\n" + data.reply;
-        })
-    })
-</script>
-
-
+    <script src="/static/js/chat.js"></script>
 </body>
 </html>
