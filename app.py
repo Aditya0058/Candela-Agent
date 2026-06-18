@@ -8,6 +8,13 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+@app.route("/projects")
+def projects():
+    return render_template("projects.html")
 
 @app.route('/chat', methods=['POST'])
 def chat():

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Candela</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/base.css') }}">
+</head>
+
+<body>
+    <!--Sidebar-->
+    <div class="sidebar">
+        <div class="logo">
+            Candela
+        </div>
+
+        <a href="/" class="menu-item">
+            New Chat
+        </a>
+        <a href="/projects" class="menu-item">
+            Projects
+        </a>
+        <a onclick="openSettings()" class="menu-item" id="settings-Btn">
+            Settings
+        </a>
+
+    </div>
+    <!--Settings Popup-->
+    <div id="settings-popup">
+        <div class="settings-sidebar">
+            <div class="settings-logo">
+                Settings
+            </div>
+
+            <a href="" class="settings-menu-item">
+                Configuration
+            </a>
+            <a href="" class="settings-menu-item">
+                Appearance
+            </a>
+            <a href="" class="settings-menu-item">
+                Account
+            </a>
+
+        </div>
+    </div>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+
+</html>
