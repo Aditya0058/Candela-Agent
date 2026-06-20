@@ -25,8 +25,14 @@
             Settings
         </a>
 
+        {% for conversation in conversations %}
+            <a href="/chat/{{ conversation.id }}" class="menu-item">
+                {{ conversation.title[:24] + "..." if conversation.title|length > 24 else conversation.title }}
+            </a>
+        {% endfor %}
+
     </div>
-    <!--Settings Popup-->
+    <!-- Settings Popup
     <div id="settings-popup">
         <div class="settings-sidebar">
             <div class="settings-logo">
@@ -44,7 +50,7 @@
             </a>
 
         </div>
-    </div>
+    </div> -->
 
     <div class="content">
         {% block content %}

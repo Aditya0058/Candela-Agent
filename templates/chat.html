@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candela — Your AI Assistant</title>
+    <link rel="icon" size="1x1" href="/Assets/Logo/real_logo.png">
+    <link rel="stylesheet" href="/static/css/chat.css">
+
+</head>
+{% extends "base.html" %}
+
+{% block content %}
+
+<!--Conversation-->
+<h1>Chat Page</h1>
+<div id="chat-container">
+
+{% for message in messages %}
+    <p>{{ message.role }}: {{ message.content }}</p>
+{% endfor %}
+
+</div>
+<!-- Input stuff-->
+<div class="input-container">
+    <input type="text" id="messageInput" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+</div>
+
+
+
+<script>
+    // Chat ID
+    const chat_id = "{{ chat_id }}";
+    //Chat Container
+    const chatContainer =
+        document.getElementById("chat-container");
+    //Send Message
+    async function sendMessage() {
+        const messageInput = document.getElementById("messageInput");
+        const message = messageInput.value;
+        messageInput.value = "";
+
+        //User Message Rendering
+        const userMessage = document.createElement("p");
+        userMessage.textContent = "user: " + message;
+        chatContainer.appendChild(userMessage);
+
+        //AI Response waiting
+        const response = await fetch(`/chat/${chat_id}/message`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ prompt: message }),
+        });
+
+        const data = await response.json();
+
+        //AI Response Rendering
+        const aiMessage =
+            document.createElement("p");
+        aiMessage.textContent =
+            "assistant: " + data.response;
+        chatContainer.appendChild(aiMessage);
+    }
+</script>
+
+{% endblock %}
+</html>

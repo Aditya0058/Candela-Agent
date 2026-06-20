@@ -13,9 +13,11 @@ async function sendMessage() {
         body: JSON.stringify({ prompt: message }),
     });
 
-    // Get the response from the server
+    // Get the data from the server
     const data = await response.json();
+    window.location.href = `/chat/${data.chat_id}`;
     console.log(data.response);
+    console.log(data.chat_id);
 
     //
 }
