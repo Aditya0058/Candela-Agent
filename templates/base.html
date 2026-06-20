@@ -27,7 +27,7 @@
 
         {% for conversation in conversations %}
             <a href="/chat/{{ conversation.id }}" class="menu-item">
-                {{ conversation.title[:24] + "..." if conversation.title|length > 24 else conversation.title }}
+                {{ conversation.title[:24] + ".." if conversation.title|length > 24 else conversation.title }}
             </a>
         {% endfor %}
 
