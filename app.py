@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 from flask_cors import CORS
 from google import genai
 from dotenv import load_dotenv
@@ -8,6 +8,7 @@ from datetime import datetime
 import os
 import uuid
 import requests
+import json 
 load_dotenv()
 
 app = Flask(__name__)
@@ -27,16 +28,21 @@ class Conversation(db.Model):
         db.DateTime,
         default=datetime.utcnow
     )
+    last_message_at = db.Column(
+        db.DateTime,
+        default=datetime.utcnow
+    )
 
 #message model
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     chat_id = db.Column(db.String(50))
-    
+
     role = db.Column(db.String(20))
 
     content = db.Column(db.Text)
+
 
 
 
@@ -78,7 +84,7 @@ def openrouter_response(prompt):
 def inject_conversations():
 
     conversations = Conversation.query.order_by(
-        Conversation.created_at.desc()
+        Conversation.last_message_at.desc()
     ).all()
 
     return {
@@ -91,9 +97,7 @@ def home():
 
     return render_template("index.html")
 
-@app.route("/projects")
-def projects():
-    return render_template("projects.html")
+
 
 # Chat Route
 @app.route('/chat', methods=['POST'])
@@ -166,6 +170,12 @@ def continue_chat(chat_id):
         content=response_text
     )
     db.session.add(ai_msg)
+    
+    conversation = Conversation.query.filter_by(
+        id=chat_id  
+    ).first()
+    conversation.last_message_at = datetime.utcnow()
+    
     db.session.commit()
     
 
@@ -174,11 +184,73 @@ def continue_chat(chat_id):
         "chat_id": chat_id
     })
 
-
-
 with app.app_context():
     db.create_all()
+#getting all boards
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+BOARDS_FOLDER = os.path.join(BASE_DIR, "boards")
+
+def get_all_boards():
+    boards = []
+
+    for file in os.listdir(BOARDS_FOLDER):
+        if file.endswith(".excalidraw"):
+            boards.append(file.replace(".excalidraw", ""))
+
+    return boards
+
+# Excalidraw Routes
+@app.route("/excalidash")
+def excalidash():
+    boards = get_all_boards()
+    return render_template("excalidash.html", boards=boards)
+
+@app.route("/new_board", methods=['POST'])
+def new_board():
+
+    os.makedirs(BOARDS_FOLDER, exist_ok=True)
+    
+    filename = "Aditya.excalidraw"
+    file_path = os.path.join(BOARDS_FOLDER, filename)
+    
+    board = {
+        "type": "excalidraw",
+        "version": 2,
+        "source": "Candela",
+        "elements": [],
+        "appState": {},
+        "files": {}
+    }
+
+    with open(file_path, "w") as f:
+        json.dump(board, f, indent=2)
+
+    return redirect(url_for("excalidash"))
 
 
+@app.route("/boards")
+def boards():
+    boards = os.listdir("boards")
+    return render_template("boards.html", boards=boards)
+
+
+@app.route("/board/<board_name>")
+def open_board(board_name):
+
+    filepath = os.path.join(
+        BOARDS_FOLDER,
+        board_name + ".excalidraw"
+    )
+
+    with open(filepath, "r") as f:
+        board_data = json.load(f)
+
+    return render_template(
+        "board.html",
+        board_name=board_name,
+        board_data=board_data,
+        boards=get_all_boards()
+    )
+    
 if __name__ == '__main__':
     app.run(debug=True)

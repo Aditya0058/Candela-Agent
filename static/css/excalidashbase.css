@@ -6,7 +6,7 @@ body{
 
 /* Sidebar */
 
-.sidebar{
+.sidebarBase{
     width:250px;
     background:#202123;
     color:white;
@@ -54,4 +54,15 @@ body{
 
 .content{
     flex:1;
+}
+.sidebarBase form{
+    margin:0;
+}
+
+.sidebarBase button{
+    width:100%;
+    border:none;
+    background:none;
+    font:inherit;
+    text-align:left;
 }

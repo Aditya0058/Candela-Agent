@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Board</title>
+</head>
+<body>
+{% extends "excalidashbase.html" %}
+
+{% block content %}
+
+<h2>{{ board_name }}</h2>
+
+<pre>{{ board_data }}</pre>
+
+{% endblock %}
+</body>
+</html>

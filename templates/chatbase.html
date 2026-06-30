@@ -5,12 +5,12 @@
     <title>Candela</title>
 
     <link rel="stylesheet"
-        href="{{ url_for('static', filename='css/base.css') }}">
+        href="{{ url_for('static', filename='css/chatbase.css') }}">
 </head>
 
 <body>
     <!--Sidebar-->
-    <div class="sidebar">
+    <div class="sidebarBase">
         <div class="logo">
             Candela
         </div>
@@ -18,9 +18,10 @@
         <a href="/" class="menu-item">
             New Chat
         </a>
-        <a href="/projects" class="menu-item">
-            Projects
+        <a href="/excalidash" class="menu-item">
+            Excalidash
         </a>
+        
         <a onclick="openSettings()" class="menu-item" id="settings-Btn">
             Settings
         </a>
@@ -32,6 +33,7 @@
         {% endfor %}
 
     </div>
+
     <!-- Settings Popup
     <div id="settings-popup">
         <div class="settings-sidebar">

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Candela</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/excalidashbase.css') }}">
+</head>
+
+<body>
+    <!--Sidebar-->
+    <div class="sidebarBase">
+        <div class="logo">
+            <a href="/">Candela</a>
+        </div>
+
+        <a href="#" onclick="new_board()" class="menu-item">
+            #
+        </a>
+        <form action="{{ url_for('new_board') }}" method="post">
+            <button type="submit" class="menu-item">
+                + New Board
+            </button>
+        </form>
+        <h3>BOARDS</h3>
+    {% for board in boards %}
+        <a href="{{ url_for('open_board', board_name=board) }}"
+        class="menu-item">
+            {{ board }}
+        </a>
+    {% endfor %}
+    </div>
+
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <script>
+        function new_board() {
+            window.location.href = "/new_board";
+        }
+    </script>
+
+</body>
+
+</html>
