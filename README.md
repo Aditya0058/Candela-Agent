@@ -1,2 +1,3 @@
 # Candela-Agent
 This is Ai agent for  for non-techy people  - Which monitors your dashboard.
+Soon Updating screenshots here.........
