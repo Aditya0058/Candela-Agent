@@ -1,0 +1,157 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.parent {
+    display: flex;
+    height: 100vh;
+    background-color: rgb(32, 32, 32);
+}
+/* Sidebar starts --------------------------------------- */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: black;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 30px;
+    display: flex;
+    flex-direction: column;
+
+}
+/* Sidebar-header starts--------------------------------------- */
+
+.sidebar-header .logo {
+    color: white;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+/* Sidebar-header ends--------------------------------------- */
+/* Sidebar-acions ends--------------------------------------- */
+.sidebar-actions {
+    padding: 10px 20px;
+}
+
+.new-chat-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: transparent;
+    color: white;
+    border: 1px solid #4d4d4f;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s ease;
+}
+
+.new-chat-btn:hover {
+    background-color: #2a2b32;
+}
+/* Sidebar-actions ends--------------------------------------- */
+/* Sidebar-footer ends--------------------------------------- */
+.sidebar-footer {
+    padding: 15px;
+    border-top: 1px solid #4d4d4f;
+    margin-top: auto;
+}
+
+.sidebar-settings-btn {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    color: #ececf1;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.sidebar-settings-btn:hover {
+    background-color: #2a2b32;
+}
+/* Sidebar-footer ends--------------------------------------- */
+/* Sidebar ends--------------------------------------- */
+.main-content {
+    background-color: rgb(32, 32, 32);
+    height: 100vh;
+    flex: 1;
+    position: relative; /* Required for absolute positioning of children */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-zone p {
+    color: #8e8ea0;
+    font-size: 28px;
+    font-family: 'Courier New', Courier, monospace; /* To match the hand-drawn look */
+    font-weight: 500;
+}
+
+.input-area {
+    position: absolute;
+    bottom: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-box {
+    width: 600px;
+    background-color: rgb(45, 45, 45);
+    border: 1px solid #4d4d4f;
+    border-radius: 20px;
+    display: flex;
+    padding: 10px 15px;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-box input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+.input-box button {
+    background-color: #10a37f;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.input-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-footer button {
+    background-color: transparent;
+    border: 1px solid #4d4d4f;
+    color: #8e8ea0;
+    border-radius: 10px;
+    padding: 2px 8px;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.input-footer button:first-child {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
