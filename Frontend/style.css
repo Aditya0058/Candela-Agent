@@ -178,3 +178,12 @@
     padding: 20px;
 
 }
+.bot-msg {
+    background-color: #343541; /* A slightly different dark shade */
+    color: white;
+    padding: 10px 15px;
+    align-self: flex-start;    /* Pushes it to the left */
+    border-radius: 5px;
+    max-width: 70%;
+    border: 1px solid #4d4d4f; /* Adds a subtle border */
+}
