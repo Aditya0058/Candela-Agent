@@ -13,7 +13,7 @@ def chat():
 
     proxy_url = "http://127.0.0.1:2026/api/generate"
     payload = {
-        "model": "gemma4", # Or any model your proxy supports
+        "model": "gemma4:31b-cloud", # Or any model your proxy supports
         "prompt": user_text,
         "stream": False     # We want the full answer at once, not piece by piece
     }
@@ -24,6 +24,7 @@ def chat():
     bot_answer = result.get("response", "Sorry, I couldn't think of an answer.")
 
     return jsonify({"response": bot_answer})
+    
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
