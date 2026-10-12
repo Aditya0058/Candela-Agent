@@ -13,9 +13,9 @@ def chat():
 
     proxy_url = "http://127.0.0.1:2026/api/generate"
     payload = {
-        "model": "gemma4:31b-cloud", # Or any model your proxy supports
+        "model": "gemma4:31b-cloud",
         "prompt": user_text,
-        "stream": False     # We want the full answer at once, not piece by piece
+        "stream": False     
     }
 
     response = requests.post(proxy_url, json=payload)

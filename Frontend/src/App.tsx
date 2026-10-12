@@ -5,8 +5,9 @@ function App() {
 
   return (
     <>
-    <Sidebar />
-    <p>hi there soon i'll update this</p>
+    <div className="main">
+      <Sidebar />
+    </div>
     </>
   )
 }
