@@ -1,5 +1,20 @@
+.logo {
+    color: var(--light-font-color);
+    font-size: 36px;
+    font-family: var(--logo-font);
+}
 .sidebar{
-    width: 20vw;
+    padding-left: 14px;
+    width: 260px;
     height: 100vh;
-    background-color: aqua;
+    background-color: var(--sidebar-bg);
+    border-right: solid var(--muted);
+    
+}
+
+.chat, .settings{
+    text-decoration: none;
+    font-family: var(--another-font);
+    font-weight: 800;
+    font-size: 24px;
 }

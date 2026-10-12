@@ -5,3 +5,5 @@ Sidebar
 -- chat sessions
 -- profile on bottom left
 -- settings on bottom right
+
+___________

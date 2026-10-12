@@ -1,5 +1,6 @@
 import './App.css'
 import Sidebar from './components/Sidebar.tsx'
+import './components/style/variables.css'
 
 function App() {
 
