@@ -8,7 +8,7 @@ function Home() {
                 <h2 className='greeting'>Welcome Back, Aditya</h2>
             </div>
             <div className="chat-box">
-                <input type="text" placeholder="Enter something here..." id="user-input" />
+                <input type="text" placeholder="Enter something here..." className="user-input" />
                 <div className="chat-box-btns">
                     <button className="attach-files">Attach</button>
                     <button className="llm-model">Gemma</button>

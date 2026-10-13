@@ -22,10 +22,21 @@
     flex-direction: column;
     gap: 16px;
     background-color: var(--muted);
-    padding: 50px;
+    padding: 10px;
     width: 700px;
     border-radius: 20px;
 }
 .user-input {
-    
+    width: 100%;
+    padding: 20px;
+    background: transparent;
+    border: none;
+    outline: none;
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+    color: var(--light-font-color);
+    font-family: var(--another-font);
+    font-size: 18px;
+    font-weight: 400;
 }
