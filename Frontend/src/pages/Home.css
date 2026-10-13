@@ -39,7 +39,11 @@
     font-family: var(--another-font);
     font-size: 18px;
     font-weight: 400;
+    resize: none;
+    max-height: 200px;
+    overflow-y: auto; 
 }
+
 .chat-box-btns{
     display: flex;
     gap: 16px;
