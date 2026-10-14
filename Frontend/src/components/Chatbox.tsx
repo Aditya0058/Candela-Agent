@@ -3,25 +3,25 @@ import { useState, useEffect, useRef } from 'react';
 
 function Chatbox() {
     const[message, setMessage] = useState("");
-        const textareaRef = useRef<HTMLTextAreaElement>(null);
-    
-        useEffect(() => {
-            const el = textareaRef.current;
-            if(!el) return;
-            el.style.height = 'auto';
-            el.style.height = el.scrollHeight + 'px'; 
-        }, [message]);
-        // send Message function
-        function sendMessage(){
-            console.log("Aditya Rajput here");
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+    useEffect(() => {
+        const el = textareaRef.current;
+        if(!el) return;
+        el.style.height = 'auto';
+        el.style.height = el.scrollHeight + 'px'; 
+    }, [message]);
+    // send Message function
+    function sendMessage(){
+        console.log("Aditya Rajput here");
+    }
+    // entering to send and shift + enter to new line
+    function onkeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
         }
-        // entering to send and shift + enter to new line
-        function onkeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
-             if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage();
-            }
-        }
+    }
     
     return (
         <div className="chat-box">
@@ -29,7 +29,6 @@ function Chatbox() {
             placeholder="Enter Something here...." 
             className="user-input" 
             ref={textareaRef} 
-            value={message} 
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={onkeyDown}
             />

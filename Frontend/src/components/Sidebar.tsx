@@ -1,7 +1,8 @@
 import './style/Sidebar.css'
 
 const items = [
-  { id: 'chat', label: 'New Chat', icon: '#', path: '/chat' },
+  { id: 'chat', label: 'New Chat', icon: '#', path: '/home' },
+  {id: 'chat1', label: 'Chat 1', icon: '#', path: '/chat'},
   { id: 'settings', label: 'Settings', icon: '#', path: '/settings' },
 
 ]
