@@ -1,8 +1,13 @@
 function Chat(){
     return(
         <div>
-            <h1>Chats</h1>
-            <p>welcome to chats page</p>
+            <div className="chat-header">
+                <div className="chat-name">Chat Title here</div>
+                <div className="chat-controls">
+                    <button className="share-btn">Share</button>
+                </div>
+            </div>
+            <div className="chats-content"></div>
 
         </div>
     )
