@@ -1,6 +1,9 @@
+import Chatbox from "../components/Chatbox";
+import './Chat.css'
+
 function Chat(){
     return(
-        <div>
+        <div className="chat-content">
             <div className="chat-header">
                 <div className="chat-name">Chat Title here</div>
                 <div className="chat-controls">
@@ -8,7 +11,9 @@ function Chat(){
                 </div>
             </div>
             <div className="chats-content"></div>
-
+            <div className="chat-box-here">
+                <Chatbox />
+            </div>
         </div>
     )
 }
