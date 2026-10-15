@@ -4,7 +4,14 @@ function Settings() {
     return(
         <div className="main-content">
             <h1>Settings</h1>
-            <p>welcome to settings page</p>
+            <div className="credentials">
+                <div className="select-endpoint">
+                    <input type="checkbox" name="" id="" />
+                </div>
+                <div className="api">
+                    <input type="text" placeholder='Enter your api key' />
+                </div>
+            </div>
         </div>
     )
 }
