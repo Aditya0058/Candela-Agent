@@ -4,7 +4,7 @@ import requests
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/chat', methods=['POST'])
+@app.route('/chats', methods=['POST'])
 def chat():
     data = request.json
     user_text = data.get('message')
