@@ -59,7 +59,7 @@ function Chat(){
                     <button className="share-btn">Share</button>
                 </div>
             </div>
-            <div className="chats-content">
+            <div className="actual-chats">
                 {messages.map((msg) => (
                     <div key={msg.id} className={`message ${msg.role}`}>
                         {msg.content}

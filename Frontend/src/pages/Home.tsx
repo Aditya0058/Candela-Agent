@@ -20,9 +20,11 @@ function Home() {
                 <img src="src/assets/candela_logo.png" alt="logo" className='greeting-logo' />
                 <h2 className='greeting'>Welcome Back, Aditya</h2>
             </div>
+            <div className="chat-box">
             <Chatbox 
                 onSend={sendPrompt} // I have to create send Prompt function which will navigate to chat page and then send message there and not here
             />
+            </div>
         </div>
     )
 }

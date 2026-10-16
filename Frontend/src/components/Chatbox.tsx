@@ -1,6 +1,7 @@
 import './style/Chatbox.css'
 import { useState, useEffect, useRef } from 'react';
 
+
 //defining props
 interface ChatboxProps {
     onSend: (message: string) => void;
@@ -26,7 +27,7 @@ function Chatbox({onSend} : ChatboxProps) {
     function onkeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
-            (message);
+            sendMessage();
         }
     }
     
@@ -41,7 +42,7 @@ function Chatbox({onSend} : ChatboxProps) {
             />
             <div className="chat-box-btns">
                 <button className="attach-files">Attach</button>
-                <button className="llm-model">Gemma</button>
+                <button className="llm-model">Model: Gemma</button>
                 <button className="send-user-input" onClick={sendMessage}>Send</button>
             </div>
         </div>
