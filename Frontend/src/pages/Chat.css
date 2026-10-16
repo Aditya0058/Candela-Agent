@@ -13,6 +13,7 @@
 .chat-header{
     display: flex;
     justify-content: space-between;
+    padding-bottom: 20px;
 }
 .chat-name {
     font-family: var(--another-font);
@@ -27,4 +28,18 @@
     color: var(--light-font-color);
     cursor: pointer;
     font-family: var(--another-font);
+}
+
+
+.message.user{
+    justify-self: end;
+    font-family: var(--another-font);
+    padding-bottom: 10px;
+}
+
+
+.message.assistant{
+    justify-self: start;
+    font-family: var(--another-font);
+    padding-bottom: 20px;
 }
