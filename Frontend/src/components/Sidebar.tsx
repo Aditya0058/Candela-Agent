@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import './style/Sidebar.css'
+
 
 const items = [
   { id: 'chat', label: 'New Chat', icon: '#', path: '/home' },
@@ -13,15 +15,15 @@ function Sidebar() {
     <>
         <div className="sidebar">
             <div className="sidebar-header">
-              <a href="/home">
+              <Link to="/home">
               <div className="logo"> <img src="src/assets/candela_logo.png" alt="" />Candela</div>
-              </a>
+              </Link>
             </div>
             <nav className='sidebar-navigation'>
               <ul>
                 {items.map(item => (
                   <li key={item.id} className={item.id}>
-                  <a href={item.path} >{item.label}</a>
+                  <Link to={item.path} >{item.label}</Link>
                   </li>
                 ))}
               </ul>

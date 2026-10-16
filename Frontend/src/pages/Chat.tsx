@@ -42,6 +42,7 @@ function Chat(){
             { id: crypto.randomUUID(), role: 'assistant', content: data.response }
         ])
     }
+    const title = messages.find(m => m.role === 'user')?.content ?? 'New Chat';
 
 
     return (
@@ -49,7 +50,7 @@ function Chat(){
 
         <div className="chat-content">
             <div className="chat-header">
-                <div className="chat-name">Chat Title here</div>
+                <div className="chat-name">{title}</div>
                 <div className="chat-controls">
                     <button className="share-btn">Share</button>
                 </div>
