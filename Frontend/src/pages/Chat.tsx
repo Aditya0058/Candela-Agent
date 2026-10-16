@@ -42,8 +42,10 @@ function Chat(){
             { id: crypto.randomUUID(), role: 'assistant', content: data.response }
         ])
     }
-    const title = messages.find(m => m.role === 'user')?.content ?? 'New Chat';
-
+    const firstUser = messages.find(m => m.role === 'user')?.content;
+    const title = firstUser
+    ? firstUser.length > 40 ? firstUser.slice(0, 40) + '…' : firstUser
+    : 'New Chat';
 
     return (
 
