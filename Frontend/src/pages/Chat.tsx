@@ -4,10 +4,6 @@ import './Chat.css'
 import { useLocation } from 'react-router-dom';
 
 
-//defining props
-// interface setMessagesProps {
-//     onSend: (message: string) => void;
-// }
 
 function Chat(){
 
@@ -15,7 +11,7 @@ function Chat(){
     const location = useLocation();
     const firstPrompt = location.state?.firstPrompt;
     const hasSentFirstPrompt = useRef(false);
-    const [messages, setMessages] = useState<{ id: number; role: string; content: string }[]>([]);
+    const [messages, setMessages] = useState<{ id: string; role: string; content: string }[]>([]);
 
     useEffect(() => {
         if(!hasSentFirstPrompt || hasSentFirstPrompt.current) return;
@@ -24,32 +20,31 @@ function Chat(){
     }, [firstPrompt]);
     
     async function sendPrompt(message: string) {
-        setMessages(prev => [...prev, {id:  Date.now(), role: 'user', content: message}]);
+        const userMessage = {
+            id: crypto.randomUUID(),
+            role: 'user',
+            content: message
+
+        }
+        const updatedMessages = [...messages, userMessage];
+        setMessages(updatedMessages);
 
         const response = await fetch("http://127.0.0.1:5000/chats", {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ message: message }),
-        });
-
+            method:"POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ messages: updatedMessages }),
+        })
         const data = await response.json();
+        console.log("data from backend:", data);
 
-        // console.log(data);
-        // console.log(data.response);
-        setMessages(prev => [...prev, {id:  Date.now(), role: 'assistant', content: data.response }]);
-        console.log(messages);
+        setMessages(prev => [
+            ...prev,
+            { id: crypto.randomUUID(), role: 'assistant', content: data.response }
+        ])
     }
 
-    // messages.map((msg) => {
-    //     return (
-    //         <div key={msg.id} className={`message ${msg.role}`}>
-    //             {msg.content}
-    //         </div>
-    //     )
-    // })
-    return(
+
+    return (
 
 
         <div className="chat-content">

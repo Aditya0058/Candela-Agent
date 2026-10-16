@@ -7,21 +7,20 @@ CORS(app)
 @app.route('/chats', methods=['POST'])
 def chat():
     data = request.json
-    user_text = data.get('message')
+    messages = data.get('messages', [])
 
-    print(f"User: {user_text}")
-
-    proxy_url = "http://127.0.0.1:2026/api/generate"
+    proxy_url = "http://127.0.0.1:2026/api/chat"
     payload = {
         "model": "gemma4:31b-cloud",
-        "prompt": user_text,
+        "messages": messages,
         "stream": False     
     }
 
     response = requests.post(proxy_url, json=payload)
     result = response.json()
 
-    bot_answer = result.get("response", "Sorry, I couldn't think of an answer.")
+    
+    bot_answer = result.get("message", {}).get("content", "Sorry, I couldn't think of an answer.")
 
     return jsonify({"response": bot_answer})
     
