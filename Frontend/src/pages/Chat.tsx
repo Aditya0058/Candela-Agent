@@ -12,12 +12,17 @@ function Chat(){
     const firstPrompt = location.state?.firstPrompt;
     const hasSentFirstPrompt = useRef(false);
     const [messages, setMessages] = useState<{ id: string; role: string; content: string }[]>([]);
+    const bottomRef = useRef<HTMLDivElement>(null); 
 
     useEffect(() => {
         if(!hasSentFirstPrompt || hasSentFirstPrompt.current) return;
         hasSentFirstPrompt.current = true;
         sendPrompt(firstPrompt);
     }, [firstPrompt]);
+
+    useEffect(() => {
+        bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
     
     async function sendPrompt(message: string) {
         const userMessage = {
@@ -63,6 +68,7 @@ function Chat(){
                         {msg.content}
                     </div>
                 ))}
+                <div ref={bottomRef} />
             </div>
             <div className="chat-box-here">
                 <Chatbox onSend={sendPrompt}/> 

@@ -8,7 +8,6 @@
 
 }
 .chat-box-here{
-    margin-top: auto;
     align-self: center;
 }
 .chat-header{
@@ -33,6 +32,8 @@
 
 .actual-chats{
     display: flex;
+    flex: 1;
+    min-height: 0;
     flex-direction: column;
     gap: 20px;
     overflow-y: auto;
