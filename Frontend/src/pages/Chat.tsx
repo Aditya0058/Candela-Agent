@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Chatbox from "../components/Chatbox";
 import './Chat.css'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
 
@@ -14,6 +14,8 @@ function Chat(){
     const hasSentFirstPrompt = useRef(false);
     const [messages, setMessages] = useState<{ id: string; role: string; content: string }[]>([]);
     const bottomRef = useRef<HTMLDivElement>(null); 
+    const {chatId} = useParams();
+    console.log(chatId)
 
     useEffect(() => {
         if(!hasSentFirstPrompt || hasSentFirstPrompt.current) return;

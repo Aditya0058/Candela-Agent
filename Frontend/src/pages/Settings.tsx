@@ -9,7 +9,7 @@ function Settings() {
                     <input type="checkbox" name="" id="" />
                 </div>
                 <div className="api">
-                    <input type="text" placeholder='Enter your api key' />
+                    <input type="text" placeholder='Enter your api key'/>
                 </div>
             </div>
         </div>

@@ -3,13 +3,18 @@ import Chatbox from '../components/Chatbox';
 import { useNavigate } from 'react-router-dom';
 
 
-
-function Home() {
+interface HomeProps{
+    onCreateChat: (id: string, firstMessage: string) => void;
+}
+function Home({onCreateChat}: HomeProps) {
     // declaring navigations
     const navigate = useNavigate();
     // sending prompt to chat.tsx
-    async function sendPrompt(message: string){ 
-        navigate('/chat', { state: { firstPrompt: message } })
+    async function sendPrompt(message: string) { 
+        const newChatId = crypto.randomUUID(); 
+        console.log("1. Home: Sending message", message);
+        onCreateChat(newChatId, message)
+        navigate(`/chat/${newChatId}`, { state: { firstPrompt: message } }); 
     }
 
 
@@ -20,11 +25,9 @@ function Home() {
                 <img src="src/assets/candela_logo.png" alt="logo" className='greeting-logo' />
                 <h2 className='greeting'>Welcome Back, Aditya</h2>
             </div>
-            <div className="chat-box">
             <Chatbox 
-                onSend={sendPrompt} // I have to create send Prompt function which will navigate to chat page and then send message there and not here
+                onSend={sendPrompt} 
             />
-            </div>
         </div>
     )
 }

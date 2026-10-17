@@ -53,4 +53,28 @@
     align-self: flex-start;
     font-family: var(--another-font);
     padding-bottom: 20px;
+    max-width: 1000px;
+}
+.message p{
+    margin: 0 0 10px 0;
+}
+.message p:last-child {
+    margin-bottom: 0;   /* no extra space at the end */
+}
+.message h1, .message h2, .message h3{
+    margin-top: 24px;
+    margin-bottom: 24px;
+    font-weight: 600;
+}
+.message ul, .message ol{
+    margin-bottom: 16px;
+    padding-left: 24px;
+
+}
+.message code {
+    background-color: rgba(216, 67, 67, 0.1);
+    margin: 5px;
+    padding: 1px;
+    border-radius: 10px;
+    font-family: monospace;
 }

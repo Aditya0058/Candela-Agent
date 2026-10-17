@@ -5,20 +5,37 @@ import Home from './pages/Home.tsx';
 import Chat from './pages/Chat.tsx';
 import Settings from './pages/Settings.tsx';
 import './components/style/variables.css'
+import { useState } from 'react';
+
+type Message = {id: string; role: string; content: string};
+type ChatSession = {
+    id: string;
+    title: string;
+    messages: Message[];
+};
 
 function App() {
-
+  const [chats, setChats] = useState<ChatSession[]>([]);
+  const createChat = (newId: string, firstMessage: string) => {
+    const newChat = {
+      id: newId,
+      title: firstMessage.length > 30 ? firstMessage.slice(0, 20) + '...' : firstMessage,
+      messages: [] 
+    };
+    
+    setChats(prev => [newChat, ...prev]); 
+  }
   return (
     <>
       <div className="main">
-        <Sidebar />
+        <Sidebar chats={chats}/>
         <main className="app-content">
           <Routes>
             <Route path="/" element={<Navigate to="/home" replace />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/chat" element={<Chat />} />
+            <Route path="/home" element={<Home onCreateChat={createChat} />} />
+            <Route path="/chat/:chatId" element={<Chat />} />
             <Route path="/settings" element={<Settings />} />
-            <Route path="*" element={<div>404 — Not Found</div>} />
+            <Route path="*" element={<div>404 — Not Found <a href="/home"><button>Navigate to Home Page</button></a></div>}/> 
           </Routes>
         </main>
       </div>
