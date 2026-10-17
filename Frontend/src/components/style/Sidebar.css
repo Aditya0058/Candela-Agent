@@ -81,21 +81,24 @@
     border-radius: 20px;
     
 } 
-.settings-btn {
-    background-color: var(--secondary-bg);
-    border-radius: 20px;
-    margin-top: auto;
-    
+.sidebar-footer{
+    padding: 10px;
 }
-.new-chat-btn {
-    text-decoration: none;
+.settings-btn {
+    margin-top: auto;
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: var(--secondary-bg);
+    border-radius: 18px;
     color: var(--light-font-color);
+    text-decoration: none;
     font-family: var(--another-font);
+    transition: background 0.2s;
     font-weight: 800;
     font-size: 20px;
     width: 100%;
-    display: flex;
     justify-content: center;
     align-items: center;
-
+    
 }
