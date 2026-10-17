@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Chatbox from "../components/Chatbox";
 import './Chat.css'
 import { useLocation } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 
 
 
@@ -65,7 +66,8 @@ function Chat(){
             <div className="actual-chats">
                 {messages.map((msg) => (
                     <div key={msg.id} className={`message ${msg.role}`}>
-                        {msg.content}
+                        <ReactMarkdown>{msg.content}</ReactMarkdown>
+                        
                     </div>
                 ))}
                 <div ref={bottomRef} />
