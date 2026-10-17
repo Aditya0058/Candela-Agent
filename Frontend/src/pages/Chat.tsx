@@ -18,7 +18,7 @@ function Chat(){
     console.log(chatId)
 
     useEffect(() => {
-        if(!hasSentFirstPrompt || hasSentFirstPrompt.current) return;
+        if(!firstPrompt || hasSentFirstPrompt.current) return;
         hasSentFirstPrompt.current = true;
         sendPrompt(firstPrompt);
     }, [firstPrompt]);
