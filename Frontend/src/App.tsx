@@ -14,6 +14,7 @@ type ChatSession = {
     messages: Message[];
 };
 
+
 function App() {
   const [chats, setChats] = useState<ChatSession[]>([]);
   const createChat = (newId: string, firstMessage: string) => {
@@ -25,6 +26,18 @@ function App() {
     
     setChats(prev => [newChat, ...prev]); 
   }
+
+  const updateChatMessages = (chatId: string, newMessages: Message[]) => {
+    setChats(prevChats => 
+        prevChats.map(chat => {
+            if (chat.id === chatId) {
+                return { ...chat, messages: newMessages };
+            }
+            return chat;
+        })
+    );
+  }
+
   return (
     <>
       <div className="main">
@@ -33,7 +46,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate to="/home" replace />} />
             <Route path="/home" element={<Home onCreateChat={createChat} />} />
-            <Route path="/chat/:chatId" element={<Chat />} />
+            <Route path="/chat/:chatId" element={<Chat chats={chats} updateChatMessages={updateChatMessages}/>} />
             <Route path="/settings" element={<Settings />} />
             <Route path="*" element={<div>404 — Not Found <a href="/home"><button>Navigate to Home Page</button></a></div>}/> 
           </Routes>

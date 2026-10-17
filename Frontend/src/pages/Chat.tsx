@@ -1,22 +1,29 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Chatbox from "../components/Chatbox";
 import './Chat.css'
 import { useLocation, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
+type Message = {id: string; role: string; content: string};
+interface chatProps{
+    chats: { 
+        id: string; 
+        title: string; 
+        messages: Message[];
+    }[];
+    updateChatMessages: (chatId: string, newMessages: Message[]) => void;
+};
 
-
-function Chat(){
+function Chat({chats, updateChatMessages}: chatProps){
 
     // extracting data
     const location = useLocation();
     const firstPrompt = location.state?.firstPrompt;
     const hasSentFirstPrompt = useRef(false);
-    const [messages, setMessages] = useState<{ id: string; role: string; content: string }[]>([]);
     const bottomRef = useRef<HTMLDivElement>(null); 
     const {chatId} = useParams();
-    console.log(chatId)
 
+    const currentChat = chats.find(c => c.id === chatId);
     useEffect(() => {
         if(!firstPrompt || hasSentFirstPrompt.current) return;
         hasSentFirstPrompt.current = true;
@@ -25,17 +32,15 @@ function Chat(){
 
     useEffect(() => {
         bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, [messages]);
+    }, [currentChat?.messages]);
     
     async function sendPrompt(message: string) {
-        const userMessage = {
-            id: crypto.randomUUID(),
-            role: 'user',
-            content: message
+        if(!chatId) return;
+        const existingMessages = currentChat?.messages ?? [];
+        const userMessage = { id: crypto.randomUUID(), role: 'user', content: message };
+        const updatedMessages = [...existingMessages, userMessage];
 
-        }
-        const updatedMessages = [...messages, userMessage];
-        setMessages(updatedMessages);
+        updateChatMessages(chatId, updatedMessages);
 
         const response = await fetch("http://127.0.0.1:5000/chats", {
             method:"POST",
@@ -43,14 +48,16 @@ function Chat(){
             body: JSON.stringify({ messages: updatedMessages }),
         })
         const data = await response.json();
-        console.log("data from backend:", data);
-
-        setMessages(prev => [
-            ...prev,
-            { id: crypto.randomUUID(), role: 'assistant', content: data.response }
-        ])
+        const assistantMessage = {
+            id: crypto.randomUUID(), 
+            role: 'assistant', 
+            content: data.response 
+        }
+        const finalMessages = [...updatedMessages, assistantMessage];
+        updateChatMessages(chatId, finalMessages);
     }
-    const firstUser = messages.find(m => m.role === 'user')?.content;
+
+    const firstUser = currentChat?.title ?? 'New Chat';
     const title = firstUser
     ? firstUser.length > 40 ? firstUser.slice(0, 40) + '…' : firstUser
     : 'New Chat';
@@ -66,7 +73,7 @@ function Chat(){
                 </div>
             </div>
             <div className="actual-chats">
-                {messages.map((msg) => (
+                {currentChat?.messages.map((msg) => (
                     <div key={msg.id} className={`message ${msg.role}`}>
                         <ReactMarkdown>{msg.content}</ReactMarkdown>
                         

@@ -12,7 +12,6 @@ function Home({onCreateChat}: HomeProps) {
     // sending prompt to chat.tsx
     async function sendPrompt(message: string) { 
         const newChatId = crypto.randomUUID(); 
-        console.log("1. Home: Sending message", message);
         onCreateChat(newChatId, message)
         navigate(`/chat/${newChatId}`, { state: { firstPrompt: message } }); 
     }
