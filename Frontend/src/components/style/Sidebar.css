@@ -1,3 +1,21 @@
+
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    padding-left: 14px;
+    padding-right: 14px;
+    width: 260px;
+    height: 100vh;
+    background-color: var(--sidebar-bg);
+    border-right: 2px solid var(--muted);
+    
+}
+.sidebar-header{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 10px;
+}
 .logo {
     color: var(--light-font-color);
     font-size: 36px;
@@ -9,16 +27,22 @@
     max-width: 180px; 
     max-height: 60px;
 }
-.sidebar{
-    display: flex;
-    flex-direction: column;
-    padding-left: 14px;
-    padding-right: 14px;
-    width: 260px;
-    height: 100vh;
-    background-color: var(--sidebar-bg);
-    border-right: 2px solid var(--muted);
-    
+
+.new-chat-btn{
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: var(--secondary-bg);
+    border-radius: 18px;
+    color: var(--light-font-color);
+    text-decoration: none;
+    font-family: var(--another-font);
+    transition: background 0.2s;
+    font-weight: 800;
+    font-size: 20px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 .sidebar-navigation {
     flex: 1;
@@ -57,9 +81,21 @@
     border-radius: 20px;
     
 } 
-.settings {
+.settings-btn {
     background-color: var(--secondary-bg);
     border-radius: 20px;
     margin-top: auto;
     
+}
+.new-chat-btn {
+    text-decoration: none;
+    color: var(--light-font-color);
+    font-family: var(--another-font);
+    font-weight: 800;
+    font-size: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
