@@ -25,7 +25,7 @@ def init_db():
 
     conn.commit()
     conn.close()
-    print("Done database created successfully")
+    print("done database created successfully")
 
 if __name__ == '__main__':
     init_db()
