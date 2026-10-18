@@ -34,6 +34,7 @@
     padding-right: 18px;
     padding-bottom: 8px;
 }
+
 .send-user-input{
     margin-left: auto;
 }
@@ -45,4 +46,7 @@
     color: var(--light-font-color);
     cursor: pointer;
     font-family: var(--another-font);
+}
+.chat-box-btns button:hover {
+    background-color: var(--secondary-bg);
 }

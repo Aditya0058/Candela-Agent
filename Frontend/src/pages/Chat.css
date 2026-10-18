@@ -29,6 +29,9 @@
     cursor: pointer;
     font-family: var(--another-font);
 }
+.share-btn:hover{
+    background-color: var(--secondary-bg);
+}
 
 .actual-chats{
     display: flex;
