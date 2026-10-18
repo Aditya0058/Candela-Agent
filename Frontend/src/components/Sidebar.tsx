@@ -5,8 +5,9 @@ import './style/Sidebar.css'
 
 interface SidebarProps {
     chats: { id: string; title: string }[];
+    deleteChat: (id: string) => void;
 }
-function Sidebar({chats}: SidebarProps) {
+function Sidebar({chats, deleteChat}: SidebarProps) {
   console.log("Sidebar received chats:", chats); //temp
   return (
     <>
@@ -23,6 +24,16 @@ function Sidebar({chats}: SidebarProps) {
                 {chats.map(chat => (
                   <li key={chat.id}>
                     <Link to={`/chat/${chat.id}`}>{chat.title}</Link>
+                    <button 
+                    className='delete-btn'
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      deleteChat(chat.id);
+                    }}
+                    >
+                      delete
+                    </button>
                   </li>
                 ))}
               </ul>

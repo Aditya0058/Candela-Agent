@@ -58,7 +58,7 @@ function App() {
   return (
     <>
       <div className="main">
-        <Sidebar chats={chats}/>
+        <Sidebar chats={chats} deleteChat={deleteChat}/>
         <main className="app-content">
           <Routes>
             <Route path="/" element={<Navigate to="/home" replace />} />
