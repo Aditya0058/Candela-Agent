@@ -1,6 +1,7 @@
 import './Home.css';
 import Chatbox from '../components/Chatbox';
 import { useNavigate } from 'react-router-dom';
+// import { useEffect } from 'react';
 
 
 interface HomeProps{
@@ -15,7 +16,9 @@ function Home({onCreateChat}: HomeProps) {
         onCreateChat(newChatId, message)
         navigate(`/chat/${newChatId}`, { state: { firstPrompt: message } }); 
     }
+    // useEffect(()=>{
 
+    // })
 
 // ----- 
     return (

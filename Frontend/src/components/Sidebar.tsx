@@ -19,6 +19,7 @@ function Sidebar({chats, deleteChat}: SidebarProps) {
               <Link to="/home" className='new-chat-btn'>New Chat</Link>
 
             </div>
+            <div className="recents-chats-heading">Recents</div>
             <nav className='sidebar-navigation'>
               <ul>
                 {chats.map(chat => (
