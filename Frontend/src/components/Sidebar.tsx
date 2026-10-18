@@ -22,7 +22,7 @@ function Sidebar({chats, deleteChat}: SidebarProps) {
             <nav className='sidebar-navigation'>
               <ul>
                 {chats.map(chat => (
-                  <li key={chat.id}>
+                  <li key={chat.id} className='chat-items'>
                     <Link to={`/chat/${chat.id}`}>{chat.title}</Link>
                     <button 
                     className='delete-btn'

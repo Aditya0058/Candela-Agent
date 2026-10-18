@@ -86,6 +86,26 @@
     border-radius: 20px;
     
 } 
+
+.chat-items {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.chat-items:hover {
+    .delete-btn{
+        opacity: 1;
+    }
+}
+.delete-btn {
+    background-color: var(--secondary-bg);
+    border: none;
+    cursor: pointer;
+    color: var(--light-font-color);
+    padding: 3px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
 .sidebar-footer{
     padding: 10px;
 }
