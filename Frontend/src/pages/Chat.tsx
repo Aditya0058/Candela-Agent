@@ -35,6 +35,20 @@ function Chat({chats, updateChatMessages}: chatProps){
         bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [currentChat?.messages]);
     
+
+    useEffect(() => {
+        if (!chatId) return;
+
+    async function loadMessages() {
+        const response = await fetch(`http://127.0.0.1:5000/api/chats/${chatId}/messages`);
+        const data = await response.json();
+        
+        // This updates App.tsx with the messages from the DB!
+        updateChatMessages(chatId!, data); 
+    }
+
+    loadMessages();
+    }, [chatId])
     async function sendPrompt(message: string) {
         if(!chatId) return;
         const existingMessages = currentChat?.messages ?? [];
@@ -46,7 +60,10 @@ function Chat({chats, updateChatMessages}: chatProps){
         const response = await fetch("http://127.0.0.1:5000/chats", {
             method:"POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ messages: updatedMessages }),
+            body: JSON.stringify({ 
+                chat_id: chatId,
+                messages: updatedMessages 
+            }),
         })
         const data = await response.json();
         const assistantMessage = {

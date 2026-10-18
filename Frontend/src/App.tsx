@@ -17,19 +17,37 @@ type ChatSession = {
 
 
 function App() {
-  const [chats, setChats] = useState<ChatSession[]>(() => {
-    const savedChats = localStorage.getItem('candela_chats');   
-    if (savedChats) {
-        return JSON.parse(savedChats);
-    }
-    return []; 
-  });
+  const [chats, setChats] = useState<ChatSession[]>([]);
 
   useEffect(() => {
-    localStorage.setItem('candela_chats', JSON.stringify(chats));
-  }, [chats]);
+    async function loadChats() {
+        const response = await fetch("http://127.0.0.1:5000/api/chats");
+        const data = await response.json();
+        
+        // The backend returns chats without the 'messages' array, so we add an empty one to match our type
+        const formattedChats = data.map((chat: any) => ({
+            ...chat,
+            messages: [] 
+        }));
+        
+        setChats(formattedChats);
+    }
+    
+    loadChats();
+  }, []);
 
-  const createChat = (newId: string, firstMessage: string) => {
+  const createChat = async (newId: string, firstMessage: string) => {
+    const title = firstMessage.length > 30 ? firstMessage.slice(0, 20) + '...' : firstMessage;
+    
+    await fetch("http://127.0.0.1:5000/api/chats", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: newId, 
+          title: title 
+        })
+    });
+
     const newChat = {
       id: newId,
       title: firstMessage.length > 30 ? firstMessage.slice(0, 20) + '...' : firstMessage,
