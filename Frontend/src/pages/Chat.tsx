@@ -3,6 +3,7 @@ import Chatbox from "../components/Chatbox";
 import './Chat.css'
 import { useLocation, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 type Message = {id: string; role: string; content: string};
 interface chatProps{
@@ -75,7 +76,7 @@ function Chat({chats, updateChatMessages}: chatProps){
             <div className="actual-chats">
                 {currentChat?.messages.map((msg) => (
                     <div key={msg.id} className={`message ${msg.role}`}>
-                        <ReactMarkdown>{msg.content}</ReactMarkdown>
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
                         
                     </div>
                 ))}

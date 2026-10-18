@@ -75,9 +75,26 @@
 
 }
 .message code {
-    background-color: rgba(216, 67, 67, 0.1);
+    background-color: rgba(24, 24, 24, 0.1);
     margin: 5px;
     padding: 1px;
     border-radius: 10px;
     font-family: monospace;
+}
+.message table {
+    width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+.message th, .message td {
+    border: 1px solid var(--color-muted); 
+    padding: 10px 14px;
+    text-align: left;
+}
+.message th {
+    background-color: var(--muted); 
+    font-weight: bold;
+    color: var(--light-font-color);
 }
