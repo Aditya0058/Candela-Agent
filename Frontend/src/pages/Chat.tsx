@@ -25,7 +25,7 @@ function Chat({chats, updateChatMessages}: chatProps){
 
     const currentChat = chats.find(c => c.id === chatId);
     useEffect(() => {
-        if(!firstPrompt || hasSentFirstPrompt.current) return;
+        if(!firstPrompt || hasSentFirstPrompt.current || (currentChat?.messages.length ?? 0) > 0) return;
         hasSentFirstPrompt.current = true;
         sendPrompt(firstPrompt);
     }, [firstPrompt]);

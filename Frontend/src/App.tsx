@@ -28,6 +28,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem('candela_chats', JSON.stringify(chats));
   }, [chats]);
+  
   const createChat = (newId: string, firstMessage: string) => {
     const newChat = {
       id: newId,
