@@ -5,7 +5,8 @@ import Home from './pages/Home.tsx';
 import Chat from './pages/Chat.tsx';
 import Settings from './pages/Settings.tsx';
 import './components/style/variables.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
 
 type Message = {id: string; role: string; content: string};
 type ChatSession = {
@@ -16,7 +17,17 @@ type ChatSession = {
 
 
 function App() {
-  const [chats, setChats] = useState<ChatSession[]>([]);
+  const [chats, setChats] = useState<ChatSession[]>(() => {
+    const savedChats = localStorage.getItem('candela_chats');   
+    if (savedChats) {
+        return JSON.parse(savedChats);
+    }
+    return []; 
+  });
+
+  useEffect(() => {
+    localStorage.setItem('candela_chats', JSON.stringify(chats));
+  }, [chats]);
   const createChat = (newId: string, firstMessage: string) => {
     const newChat = {
       id: newId,
