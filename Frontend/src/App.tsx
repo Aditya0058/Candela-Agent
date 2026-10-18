@@ -28,7 +28,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem('candela_chats', JSON.stringify(chats));
   }, [chats]);
-  
+
   const createChat = (newId: string, firstMessage: string) => {
     const newChat = {
       id: newId,
@@ -48,6 +48,11 @@ function App() {
             return chat;
         })
     );
+  }
+  
+  const deleteChat = (chatId: string) => {
+    const updatedChat = chats.filter(chat => chat.id !== chatId);
+    setChats(updatedChat);
   }
 
   return (
