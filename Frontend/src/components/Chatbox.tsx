@@ -5,9 +5,10 @@ import { useState, useEffect, useRef } from 'react';
 //defining props
 interface ChatboxProps {
     onSend: (message: string) => void;
+    isLading: boolean;
 }
 
-function Chatbox({onSend} : ChatboxProps) {
+function Chatbox({onSend, isLoading} : ChatboxProps) {
     //defining variables
     const[message, setMessage] = useState("");
     const textareaRef = useRef<HTMLTextAreaElement>(null);

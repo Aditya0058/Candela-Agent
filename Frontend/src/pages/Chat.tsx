@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Chatbox from "../components/Chatbox";
 import './Chat.css'
 import { useLocation, useParams } from 'react-router-dom';
@@ -23,6 +23,7 @@ function Chat({chats, updateChatMessages}: chatProps){
     const hasSentFirstPrompt = useRef(false);
     const bottomRef = useRef<HTMLDivElement>(null); 
     const {chatId} = useParams();
+    const [isLoading, setIsLoading] = useState(false);
 
     const currentChat = chats.find(c => c.id === chatId);
     useEffect(() => {
@@ -51,28 +52,36 @@ function Chat({chats, updateChatMessages}: chatProps){
     }, [chatId])
     async function sendPrompt(message: string) {
         if(!chatId) return;
-        const existingMessages = currentChat?.messages ?? [];
-        const userMessage = { id: crypto.randomUUID(), role: 'user', content: message };
-        const updatedMessages = [...existingMessages, userMessage];
 
-        updateChatMessages(chatId, updatedMessages);
+        setIsLoading(true)
 
-        const response = await fetch("http://127.0.0.1:5000/chats", {
-            method:"POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ 
-                chat_id: chatId,
-                messages: updatedMessages 
-            }),
-        })
-        const data = await response.json();
-        const assistantMessage = {
-            id: crypto.randomUUID(), 
-            role: 'assistant', 
-            content: data.response 
+        try{
+            const existingMessages = currentChat?.messages ?? [];
+            const userMessage = { id: crypto.randomUUID(), role: 'user', content: message };
+            const updatedMessages = [...existingMessages, userMessage];
+    
+            updateChatMessages(chatId, updatedMessages);
+    
+            const response = await fetch("http://127.0.0.1:5000/chats", {
+                method:"POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    chat_id: chatId,
+                    messages: updatedMessages 
+                }),
+            })
+            const data = await response.json();
+            const assistantMessage = {
+                id: crypto.randomUUID(), 
+                role: 'assistant', 
+                content: data.response 
+            }
+            const finalMessages = [...updatedMessages, assistantMessage];
+            updateChatMessages(chatId, finalMessages);
+        } finally {
+            setIsLoading(false)
         }
-        const finalMessages = [...updatedMessages, assistantMessage];
-        updateChatMessages(chatId, finalMessages);
+
     }
 
     const firstUser = currentChat?.title ?? 'New Chat';
@@ -100,7 +109,10 @@ function Chat({chats, updateChatMessages}: chatProps){
                 <div ref={bottomRef} />
             </div>
             <div className="chat-box-here">
-                <Chatbox onSend={sendPrompt}/> 
+                <Chatbox 
+                onSend={sendPrompt}
+                isLoading={isLoading}
+                /> 
             </div>
         </div>
     )

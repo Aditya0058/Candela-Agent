@@ -3,8 +3,11 @@ from flask_cors import CORS
 import requests
 import sqlite3
 import uuid
+import os
 app = Flask(__name__)
 CORS(app)
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # database routes below
 @app.route('/api/chats', methods=['GET'])
@@ -87,10 +90,20 @@ def chat():
     conn.commit()
     conn.close()
 
+    prompt_path = os.path.join(BASE_DIR, 'prompts', 'candela_system.txt')
+    with open(prompt_path, 'r', encoding='utf-8') as file:
+        system_prompt_text = file.read().strip()
+
+    system_prompt = {
+        "role": "system",
+        "content": system_prompt_text
+    }
+    messages_with_system = [system_prompt] + messages
+
     proxy_url = "http://127.0.0.1:2026/api/chat"
     payload = {
         "model": "gemma4:31b-cloud",
-        "messages": messages,
+        "messages": messages_with_system,
         "stream": False     
     }
 
