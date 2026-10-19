@@ -24,6 +24,7 @@ function Chat({chats, updateChatMessages}: chatProps){
     const bottomRef = useRef<HTMLDivElement>(null); 
     const {chatId} = useParams();
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     const currentChat = chats.find(c => c.id === chatId);
     useEffect(() => {
@@ -52,8 +53,8 @@ function Chat({chats, updateChatMessages}: chatProps){
     }, [chatId])
     async function sendPrompt(message: string) {
         if(!chatId) return;
-
-        setIsLoading(true)
+        setError(null);
+        setIsLoading(true);
 
         try{
             const existingMessages = currentChat?.messages ?? [];
@@ -78,6 +79,9 @@ function Chat({chats, updateChatMessages}: chatProps){
             }
             const finalMessages = [...updatedMessages, assistantMessage];
             updateChatMessages(chatId, finalMessages);
+        } catch{
+            setError("Failed to connect to the server.");
+            console.error("Failed to fetch:", error);
         } finally {
             setIsLoading(false)
         }
@@ -108,6 +112,11 @@ function Chat({chats, updateChatMessages}: chatProps){
                 ))}
                 <div ref={bottomRef} />
             </div>
+            {error && (
+                <div className="error-banner">
+                    -- {error}
+                </div>
+            )}
             <div className="chat-box-here">
                 <Chatbox 
                 onSend={sendPrompt}

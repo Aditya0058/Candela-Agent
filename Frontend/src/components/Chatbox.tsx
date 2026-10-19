@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 //defining props
 interface ChatboxProps {
     onSend: (message: string) => void;
-    isLading: boolean;
+    isLoading: boolean;
 }
 
 function Chatbox({onSend, isLoading} : ChatboxProps) {
@@ -35,16 +35,19 @@ function Chatbox({onSend, isLoading} : ChatboxProps) {
     return (
         <div className="chat-box">
             <textarea 
-            placeholder="Enter Something here...." 
-            className="user-input" 
-            ref={textareaRef} 
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyDown={onkeyDown}
+                placeholder="Enter Something here...." 
+                className="user-input" 
+                ref={textareaRef} 
+                onChange={(e) => setMessage(e.target.value)}
+                onKeyDown={onkeyDown}
+                disabled = {isLoading}
             />
             <div className="chat-box-btns">
                 <button className="attach-files">Attach</button>
                 <button className="llm-model">Model: Gemma</button>
-                <button className="send-user-input" onClick={sendMessage}>Send</button>
+                <button className="send-user-input" onClick={sendMessage} disabled={isLoading}>
+                    {isLoading ? "Thinking..." : "Send"}
+                </button>
             </div>
         </div>
     )

@@ -50,3 +50,7 @@
 .chat-box-btns button:hover {
     background-color: var(--secondary-bg);
 }
+button:disabled, textarea:disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+}
