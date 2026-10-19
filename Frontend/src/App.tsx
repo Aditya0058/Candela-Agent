@@ -68,7 +68,10 @@ function App() {
     );
   }
   
-  const deleteChat = (chatId: string) => {
+  const deleteChat = async (chatId: string) => {
+    await fetch(`http://127.0.0.1:5000/api/chats/${chatId}`, {
+      method: "DELETE"
+    })
     const updatedChat = chats.filter(chat => chat.id !== chatId);
     setChats(updatedChat);
   }

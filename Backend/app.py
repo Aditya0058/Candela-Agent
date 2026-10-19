@@ -39,7 +39,18 @@ def create_chat():
     
     return jsonify({"status": "success", "id": chat_id}), 201
 
-# getting data from datbase
+@app.route('/api/chats/<chat_id>', methods=['DELETE'])
+def delete_chat(chat_id):
+    conn = sqlite3.connect('candela.db')
+    cursor = conn.cursor()
+
+    cursor.execute('DELETE FROM chats WHERE id = ?', (chat_id,))
+
+    conn.commit()
+    conn.close()
+    return jsonify({"status": "success"}), 200
+
+# getting  data from datbase
 @app.route('/api/chats/<chat_id>/messages', methods=['GET'])
 def get_chat_messages(chat_id):
     conn = sqlite3.connect('candela.db')
