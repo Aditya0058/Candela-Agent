@@ -12,6 +12,7 @@ function Chatbox({onSend, isLoading} : ChatboxProps) {
     //defining variables
     const[message, setMessage] = useState("");
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const candela_model = localStorage.getItem('candela_model')
 
     useEffect(() => {
         const el = textareaRef.current;
@@ -31,6 +32,7 @@ function Chatbox({onSend, isLoading} : ChatboxProps) {
             sendMessage();
         }
     }
+
     
     return (
         <div className="chat-box">
@@ -43,8 +45,7 @@ function Chatbox({onSend, isLoading} : ChatboxProps) {
                 disabled = {isLoading}
             />
             <div className="chat-box-btns">
-                <button className="attach-files">Attach</button>
-                <button className="llm-model">Model: Gemma</button>
+                <button className="llm-model">Model:  {candela_model}</button>
                 <button className="send-user-input" onClick={sendMessage} disabled={isLoading}>
                     {isLoading ? "Thinking..." : "Send"}
                 </button>

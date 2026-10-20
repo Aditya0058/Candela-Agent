@@ -98,6 +98,7 @@ function Chat({chats, updateChatMessages}: chatProps){
     const title = firstUser
     ? firstUser.length > 40 ? firstUser.slice(0, 40) + '…' : firstUser
     : 'New Chat';
+    const now = new Date();
 
     return (
 
@@ -106,7 +107,7 @@ function Chat({chats, updateChatMessages}: chatProps){
             <div className="chat-header">
                 <div className="chat-name">{title}</div>
                 <div className="chat-controls">
-                    <button className="share-btn">Share</button>
+                    <button className="share-btn">{now.toDateString()}</button>
                 </div>
             </div>
             <div className="actual-chats">

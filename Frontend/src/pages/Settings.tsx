@@ -6,19 +6,33 @@ function Settings() {
     const [apiKey, setApiKey] = useState(() => localStorage.getItem('candela_api_key') || '');
     const [proxyUrl, setProxyUrl] = useState(() => localStorage.getItem('candela_proxy_url') || 'http://127.0.0.1:2026/api/chat');
     const [modelName, setModelName] = useState(() => localStorage.getItem('candela_model') || 'gemma4:31b-cloud');  
+    const [userName, setUserName] = useState(() => localStorage.getItem('user_name') || '');  
 
     const saveSettings = () => {
         localStorage.setItem('candela_api_key', apiKey);
         localStorage.setItem('candela_model', modelName);
         localStorage.setItem('candela_proxy_url', proxyUrl)
+        localStorage.setItem('user_name', userName)
         alert("Settings saved successfully!");
     }
 
     return(
-        <div className="main-content">
-            <h1>Settings</h1>
-                        <div className="credentials">
-                
+        <>
+            <h1 className='settings-heading'>Settings</h1>
+            <div className="personal-info">
+                <div className="personal-info-heading">Personal Info</div>
+                <div className="input-group">
+                    <label>Your Name</label>
+                    <input 
+                        type="text" 
+                        placeholder="e.g., Tommy" 
+                        value={userName}
+                        onChange={(e) => setUserName(e.target.value)}
+                    />
+                </div>
+            </div>
+            <div className="credentials">
+                <div className="credentials-heading">Credentials</div>
                 <div className="input-group">
                     <label>Proxy URL</label>
                     <input 
@@ -29,7 +43,6 @@ function Settings() {
                     />
                 </div>
 
-                {/* 2. Model Name Input */}
                 <div className="input-group">
                     <label>Model Name</label>
                     <input 
@@ -40,7 +53,6 @@ function Settings() {
                     />
                 </div>
 
-                {/* 3. API Key Input */}
                 <div className="input-group">
                     <label>API Key</label>
                     <input 
@@ -50,10 +62,11 @@ function Settings() {
                         onChange={(e) => setApiKey(e.target.value)}
                     />
                 </div>
-
-                <button onClick={saveSettings} className="save-btn">Save Settings</button>
+                <div className="save-btn-div">
+                    <button onClick={saveSettings} className="save-btn">Save Settings</button>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 export default Settings;
