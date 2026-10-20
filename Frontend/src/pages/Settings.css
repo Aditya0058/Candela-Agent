@@ -64,6 +64,7 @@
 .credentials-heading, .personal-info-heading{
     font-family: var(--another-font);
     font-size: 30px;
+    padding-top: 30px;
     color: var(--secondary-bg);
     font-weight: 600;
 }
