@@ -7,7 +7,7 @@ import sys
 def start_servers():
     print("Starting candela frontend and backend servers please wait ....")
     backend_process = subprocess.Popen(
-        ["sys.executable", "app.py"], 
+        [sys.executable, "app.py"], 
         cwd="Backend"
     )
     frontend_process = subprocess.Popen(
