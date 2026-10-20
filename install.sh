@@ -16,7 +16,7 @@ if [ ! -d "Candela-Agent" ]; then
     cd Candela-Agent
 else
     echo "you r smart Candela directory already exists! Updating..."
-    cd Candela-Agent
+    cd Candela-Agent-MVP
     git pull
 fi
 

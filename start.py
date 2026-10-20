@@ -27,7 +27,7 @@ def start_servers():
         backend_process.wait()
         frontend_process.wait()
     except KeyboardInterrupt:
-        print("\n🛑 Shutting down Candela...")
+        print("\n Shutting down Candela...")
         backend_process.terminate()
         frontend_process.terminate()
 
