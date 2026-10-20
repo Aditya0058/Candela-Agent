@@ -76,6 +76,8 @@ def chat():
     data = request.json
     messages = data.get('messages', [])
     chat_id = data.get('chat_id')
+    provider = data.get('provider', 'ollama')
+    api_key = data.get('api_key', '')
 
     user_msg = messages[-1]
 
