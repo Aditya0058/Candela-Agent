@@ -4,6 +4,9 @@ import time
 import webbrowser
 import sys
 
+color='\033[0;33m' # yellow
+NC='\033[0m' # no color
+
 def start_servers():
     print("Starting candela frontend and backend servers please wait ....")
     backend_process = subprocess.Popen(
