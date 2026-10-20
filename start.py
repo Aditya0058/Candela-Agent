@@ -19,7 +19,7 @@ def start_servers():
         shell=True 
     )
     print("Waiting for servers to boot up...")
-    time.sleep(10) 
+    time.sleep(8) 
 
     print(f"{color}Opening Candela in your browser cuz i am not lazyy{NC}")
     webbrowser.open("http://localhost:5173")
