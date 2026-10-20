@@ -4,8 +4,8 @@ import './Settings.css'
 function Settings() {
 
     const [apiKey, setApiKey] = useState(() => localStorage.getItem('candela_api_key') || '');
-    const [proxyUrl, setProxyUrl] = useState(() => localStorage.getItem('candela_proxy_url') || 'http://127.0.0.1:2026/api/chat');
-    const [modelName, setModelName] = useState(() => localStorage.getItem('candela_model') || 'gemma4:31b-cloud');  
+    const [proxyUrl, setProxyUrl] = useState(() => localStorage.getItem('candela_proxy_url') || '');
+    const [modelName, setModelName] = useState(() => localStorage.getItem('candela_model') || '');  
     const [userName, setUserName] = useState(() => localStorage.getItem('user_name') || '');  
 
     const saveSettings = () => {
