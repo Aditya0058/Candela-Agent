@@ -10,4 +10,7 @@ Candela Agent is opensource software where there are lots of tools given to AI w
 6. No secretly injected System Prompts except "Name of Candela"
 
 # Screenshots 
-![alt text](/Assets/image.png)
+![alt text](/Assets/image1.png)
+![alt text](/Assets/image2.png)
+![alt text](/Assets/image3.png)
+
