@@ -76,8 +76,9 @@ def chat():
     data = request.json
     messages = data.get('messages', [])
     chat_id = data.get('chat_id')
-    provider = data.get('provider', 'ollama')
-    api_key = data.get('api_key', '')
+    proxy_url = data.get('proxy_url', 'http://127.0.0.1:2026/api/chat')
+    model_name = data.get('model', 'gemma4:31b-cloud')
+    api_key = data.get('api_key', '')   
 
     user_msg = messages[-1]
 
@@ -102,18 +103,38 @@ def chat():
     }
     messages_with_system = [system_prompt] + messages
 
-    proxy_url = "http://127.0.0.1:2026/api/chat"
+    headers = {"Content-Type": "application/json"}
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
+
     payload = {
-        "model": "gemma4:31b-cloud",
+        "model": model_name,
         "messages": messages_with_system,
-        "stream": False     
+        "stream": False
     }
 
-    response = requests.post(proxy_url, json=payload)
-    result = response.json()
+    try:
+        response = requests.post(proxy_url, json=payload, headers=headers)
+        result = response.json()
 
-    
-    bot_answer = result.get("message", {}).get("content", "Sorry, I couldn't think of an answer.")
+        if "error" in result:
+            error_msg = result["error"]
+            if isinstance(error_msg, dict):
+                error_msg = error_msg.get("message", str(error_msg)) # OpenAI style
+            bot_answer = f"⚠️ API Error: {error_msg}"
+            
+        elif "choices" in result:
+            bot_answer = result["choices"][0]["message"]["content"]
+            
+        elif "message" in result:
+            bot_answer = result["message"]["content"]
+            
+
+        else:
+            bot_answer = f"Unexpected response format from proxy: {result}"
+            
+    except Exception as e:
+        bot_answer = f"Connection Error: {str(e)}"
 
     ai_msg_id = str(uuid.uuid4())
     conn = sqlite3.connect('candela.db')
