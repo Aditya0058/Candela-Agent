@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     async function loadChats() {
-        const response = await fetch("http://127.0.0.1:5000/api/chats");
+        const response = await fetch("https://candela-agent-mvp-red.vercel.app/api/chats");
         const data = await response.json();
         
         // The backend returns chats without the 'messages' array, so we add an empty one to match our type
@@ -39,7 +39,7 @@ function App() {
   const createChat = async (newId: string, firstMessage: string) => {
     const title = firstMessage.length > 30 ? firstMessage.slice(0, 20) + '...' : firstMessage;
     
-    await fetch("http://127.0.0.1:5000/api/chats", {
+    await fetch("https://candela-agent-mvp-red.vercel.app//api/chats", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -69,7 +69,7 @@ function App() {
   }
   
   const deleteChat = async (chatId: string) => {
-    await fetch(`http://127.0.0.1:5000/api/chats/${chatId}`, {
+    await fetch(`https://candela-agent-mvp-red.vercel.app/api/chats/${chatId}`, {
       method: "DELETE"
     })
     const updatedChat = chats.filter(chat => chat.id !== chatId);

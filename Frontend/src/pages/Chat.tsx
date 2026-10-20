@@ -26,8 +26,8 @@ function Chat({chats, updateChatMessages}: chatProps){
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const apiKey = localStorage.getItem('candela_api_key') || '';
-    const proxyUrl = localStorage.getItem('candela_proxy_url') || 'http://127.0.0.1:2026/api/chat';
-    const modelName = localStorage.getItem('candela_model') || 'gemma4:31b-cloud';
+    const proxyUrl = localStorage.getItem('candela_proxy_url') || '';
+    const modelName = localStorage.getItem('candela_model') || ' ';
 
     const currentChat = chats.find(c => c.id === chatId);
     useEffect(() => {
@@ -45,7 +45,7 @@ function Chat({chats, updateChatMessages}: chatProps){
         if (!chatId) return;
 
     async function loadMessages() {
-        const response = await fetch(`http://127.0.0.1:5000/api/chats/${chatId}/messages`);
+        const response = await fetch(`https://candela-agent-mvp-red.vercel.app/api/chats/${chatId}/messages`);
         const data = await response.json();
         
         // This updates App.tsx with the messages from the DB!
@@ -66,7 +66,7 @@ function Chat({chats, updateChatMessages}: chatProps){
     
             updateChatMessages(chatId, updatedMessages);
     
-            const response = await fetch("http://127.0.0.1:5000/chats", {
+            const response = await fetch("https://candela-agent-mvp-red.vercel.app//chats", {
                 method:"POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ 
