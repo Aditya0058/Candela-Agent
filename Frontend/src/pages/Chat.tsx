@@ -45,7 +45,7 @@ function Chat({chats, updateChatMessages}: chatProps){
         if (!chatId) return;
 
     async function loadMessages() {
-        const response = await fetch(`https://candela-agent-mvp-red.vercel.app/api/chats/${chatId}/messages`);
+        const response = await fetch(`https://candela-agent-mvp-green.vercel.app/api/chats/${chatId}/messages`);
         const data = await response.json();
         
         // This updates App.tsx with the messages from the DB!
@@ -66,7 +66,7 @@ function Chat({chats, updateChatMessages}: chatProps){
     
             updateChatMessages(chatId, updatedMessages);
     
-            const response = await fetch("https://candela-agent-mvp-red.vercel.app//chats", {
+            const response = await fetch("https://candela-agent-mvp-green.vercel.app/chats", {
                 method:"POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ 
