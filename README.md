@@ -44,7 +44,7 @@ curl -fsSL https://raw.githubusercontent.com/Aditya0058/Candela-Agent-MVP/main/i
 1. select model in hackclub ai or any platform you want.
 2. You'll find somthing like this (Code Example)
 
-'''
+```
  curl https://ai.hackclub.com/proxy/v1/chat/completions \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
@@ -54,7 +54,7 @@ curl -fsSL https://raw.githubusercontent.com/Aditya0058/Candela-Agent-MVP/main/i
       {"role": "user", "content": "Hello!"}
     ]
   }
-'''
+```
 
 3. Here in this case 
    - Proxy_URL is "https://ai.hackclub.com/proxy/v1/chat/completions"
