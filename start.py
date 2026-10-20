@@ -11,12 +11,12 @@ def start_servers():
         cwd="Backend"
     )
     frontend_process = subprocess.Popen(
-        ["npm", "run", "dev"],
+        "npm run dev",
         cwd="Frontend",
         shell=True 
     )
     print("Waiting for servers to boot up...")
-    time.sleep(5) 
+    time.sleep(10) 
 
     print("Opening Candela in your browser cuz i am not lazyy")
     webbrowser.open("http://localhost:5173")
