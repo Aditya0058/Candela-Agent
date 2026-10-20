@@ -7,11 +7,11 @@ echo "Starting Candela-Agent-MVP Initialization"
 echo "Checking prerequisites"
 if ! command -v git &> /dev/null; then echo "////// Bruhhh!, Git is not installed."; exit 1; fi
 if ! command -v python3 &> /dev/null; then echo "////// Bruhhh!, Python3 is not installed."; exit 1; fi
-if ! command -v git &> /dev/null; then echo "////// Bruhhhh!, Node.js/NPM is not installed."; exit 1; fi
+if ! command -v npm &> /dev/null; then echo "////// Bruhhhh!, Node.js/NPM is not installed."; exit 1; fi
 
 echo ":) :) Huurayyyy! Prerequisites met!"
 
-if [ ! -d "Candela-Agent" ]; then
+if [ ! -d "Candela-Agent-MVP" ]; then
     echo "Wait bro Downloading Candela..."
     git clone https://github.com/Aditya0058/Candela-Agent-MVP.git
     cd Candela-Agent-MVP
