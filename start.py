@@ -8,7 +8,7 @@ color='\033[0;33m' # yellow
 NC='\033[0m' # no color
 
 def start_servers():
-    print("Starting candela frontend and backend servers please wait ....")
+    print(f"{color}Starting candela frontend and backend servers please wait ....{NC}")
     backend_process = subprocess.Popen(
         [sys.executable, "app.py"], 
         cwd="Backend"
@@ -21,10 +21,10 @@ def start_servers():
     print("Waiting for servers to boot up...")
     time.sleep(10) 
 
-    print("Opening Candela in your browser cuz i am not lazyy")
+    print(f"{color}Opening Candela in your browser cuz i am not lazyy{NC}")
     webbrowser.open("http://localhost:5173")
 
-    print("\nFinally, Candela is running! Press Ctrl+C to stop.")
+    print(f"{color}\nFinally, Candela is running! Press Ctrl+C to stop.{NC}")
 
     try:
         backend_process.wait()
