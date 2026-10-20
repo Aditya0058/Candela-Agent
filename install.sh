@@ -14,7 +14,7 @@ echo ":) :) Huurayyyy! Prerequisites met!"
 if [ ! -d "Candela-Agent" ]; then
     echo "Wait bro Downloading Candela..."
     git clone https://github.com/Aditya0058/Candela-Agent-MVP.git
-    cd Candela-Agent
+    cd Candela-Agent-MVP
 else
     echo "you r smart Candela directory already exists! Updating..."
     cd Candela-Agent-MVP
