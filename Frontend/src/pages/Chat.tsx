@@ -25,6 +25,9 @@ function Chat({chats, updateChatMessages}: chatProps){
     const {chatId} = useParams();
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const apiKey = localStorage.getItem('candela_api_key') || '';
+    const proxyUrl = localStorage.getItem('candela_proxy_url') || 'http://127.0.0.1:2026/api/chat';
+    const modelName = localStorage.getItem('candela_model') || 'gemma4:31b-cloud';
 
     const currentChat = chats.find(c => c.id === chatId);
     useEffect(() => {
@@ -68,7 +71,10 @@ function Chat({chats, updateChatMessages}: chatProps){
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ 
                     chat_id: chatId,
-                    messages: updatedMessages 
+                    messages: updatedMessages,
+                    api_key: apiKey,
+                    proxy_url: proxyUrl,
+                    model: modelName
                 }),
             })
             const data = await response.json();
