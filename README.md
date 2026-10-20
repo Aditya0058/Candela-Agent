@@ -11,7 +11,9 @@ Candela Agent is opensource software where there are lots of tools given to AI w
 
 # Screenshots 
 ![alt text](/Assets/image1.png)
+
 ![alt text](/Assets/image2.png)
+
 ![alt text](/Assets/image3.png)
 
 # How to run it on your system
